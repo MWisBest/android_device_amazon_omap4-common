@@ -51,6 +51,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
+#include <stdint.h>
 
 /** The OMX_API and OMX_APIENTRY are platform specific definitions used
  *  to declare OMX function prototypes.  They are modified to meet the
