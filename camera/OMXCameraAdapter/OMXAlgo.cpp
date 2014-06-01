@@ -351,8 +351,8 @@ status_t OMXCameraAdapter::setAutoConvergence(const char *pValstr, const char *p
         // transform the coordinates to 3A-type coordinates
         mTouchAreas.itemAt(0)->transfrom(mPreviewData->mWidth/widthDivisor,
                                          mPreviewData->mHeight/heightDivisor,
-                                         ACParams.nACProcWinStartY,
-                                         ACParams.nACProcWinStartX,
+                                         (int32_t&)ACParams.nACProcWinStartY,
+                                         (int32_t&)ACParams.nACProcWinStartX,
                                          ACParams.nACProcWinWidth,
                                          ACParams.nACProcWinHeight);
     }
