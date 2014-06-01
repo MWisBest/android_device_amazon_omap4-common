@@ -1199,13 +1199,13 @@ void AppCallbackNotifier::notifyFrame()
                                 mapper.lock((buffer_handle_t)vBuf, CAMHAL_GRALLOC_USAGE, bounds, y_uv);
                                 y_uv[1] = y_uv[0] + mVideoHeight*4096;
 
-                                structConvImage input =  {frame->mWidth,
-                                                          frame->mHeight,
+                                structConvImage input =  {(int)frame->mWidth,
+                                                          (int)frame->mHeight,
                                                           4096,
                                                           IC_FORMAT_YCbCr420_lp,
                                                           (mmByte *)frame->mYuv[0],
                                                           (mmByte *)frame->mYuv[1],
-                                                          frame->mOffset};
+                                                          (int)frame->mOffset};
 
                                 structConvImage output = {mVideoWidth,
                                                           mVideoHeight,
