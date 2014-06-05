@@ -63,6 +63,15 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
       Override build.prop items with custom vendor init.
       Enabled when TARGET_UNIFIED_DEVICE is defined in BoardConfig
 
+  --mount_by_label <boolean>
+      Force the OTA package to mount and format System by label
+      Can be enabled by defining TARGET_SETS_FSTAB. Defaults to false.
+
+  -2  (--two_step)
+      Generate a 'two-step' OTA package, where recovery is updated
+      first, so that any changes made to the system partition are done
+      using the new recovery (new kernel, etc.).
+
 """
 
 import sys
@@ -102,6 +111,8 @@ OPTIONS.worker_threads = 3
 OPTIONS.backuptool = False
 OPTIONS.override_device = 'auto'
 OPTIONS.override_prop = False
+OPTIONS.mount_by_label = False
+OPTIONS.two_step = False
 
 def MostPopularKey(d, default):
   """Given a dict, return the key corresponding to the largest
@@ -115,7 +126,7 @@ def MostPopularKey(d, default):
 def IsSymlink(info):
   """Return true if the zipfile.ZipInfo object passed in represents a
   symlink."""
-  return (info.external_attr >> 16) & 0770000 == 0120000
+  return (info.external_attr >> 16 & 0770000) == 0120000
 
 def IsRegular(info):
   """Return true if the zipfile.ZipInfo object passed in represents a
