@@ -80,7 +80,10 @@ PRODUCT_COPY_FILES += \
 # Wifi
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
-    wpa_supplicant_conf \
+    hostapd \
+    libwpa_client \
+    wpa_supplicant \
+    wpa_supplicant.conf
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -142,6 +145,10 @@ PRODUCT_PACKAGES += \
 # Prebuilts
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/prebuilt/etc/gps.conf:/system/etc/gps.conf
+
+# libcorkscrew is needed for some of the PVR stuff.
+PRODUCT_PACKAGES += \
+    libcorkscrew
 
 $(call inherit-product-if-exists, vendor/amazon/omap4-common/omap4-common-vendor.mk)
 
