@@ -116,7 +116,8 @@ enum {
        of this layer outside of the normal prepare()/set() loop. Added in
        HWC_DEVICE_API_VERSION_1_4. */
     HWC_CURSOR_OVERLAY =  5
- };
+};
+
 /*
  * hwc_layer_t::blending values
  */
@@ -191,6 +192,11 @@ enum {
      */
     HWC_DISPLAY_DPI_X                       = 4,
     HWC_DISPLAY_DPI_Y                       = 5,
+    /* Indicates if the display is secure
+     * For HDMI/WFD if the sink supports HDCP, it will be true
+     * Primary panel is always considered secure
+     */
+    HWC_DISPLAY_SECURE                      = 6,
 };
 
 /* Allowed events for hwc_methods::eventControl() */

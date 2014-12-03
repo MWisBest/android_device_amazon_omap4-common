@@ -34,13 +34,7 @@ endif
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
@@ -80,8 +74,8 @@ PRODUCT_COPY_FILES += \
 # Wifi
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
-    hostapd \
     libwpa_client \
+    hostapd \
     wpa_supplicant \
     wpa_supplicant.conf
 
@@ -101,7 +95,8 @@ PRODUCT_PACKAGES += \
     tinycap \
     audio_policy.default \
     audio.a2dp.default \
-    audio.usb.default
+    audio.usb.default \
+    audio.r_submix.default
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -113,14 +108,13 @@ PRODUCT_PACKAGES += \
     strace \
     libjni_pinyinime \
     sh \
+    libcorkscrew
 
-# Extra apps (not always included by AOSP)
+# symlinks and pvr files
 PRODUCT_PACKAGES += \
-    Email \
-
-#symlinks
-PRODUCT_PACKAGES += \
-    libion.so
+    libion.so \
+    pvrsrvinit \
+    libPVRScopeServices.so
 
 # TI OMAP4
 PRODUCT_PACKAGES += \

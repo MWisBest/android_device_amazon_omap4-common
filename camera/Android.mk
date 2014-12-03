@@ -120,8 +120,25 @@ TI_CAMERAHAL_COMMON_SHARED_LIBRARIES := \
     libtiutils_custom \
     libcamera_client \
     libgui \
-    libjpeg \
+    libjpeg
+
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 19 || echo 1),)
+# check for 5.0 and greater
+ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 21 || echo 1),)
+TI_CAMERAHAL_COMMON_SHARED_LIBRARIES += \
     libjhead
+# currently 4.4.3 and 4.4.4
+else ifneq ($(filter 4.4.3 4.4.4,$(PLATFORM_VERSION)),)
+TI_CAMERAHAL_COMMON_SHARED_LIBRARIES += \
+    libjhead
+else
+TI_CAMERAHAL_COMMON_SHARED_LIBRARIES += \
+    libexif
+endif
+else
+TI_CAMERAHAL_COMMON_SHARED_LIBRARIES += \
+    libexif
+endif
 
 TI_CAMERAHAL_COMMON_SHARED_LIBRARIES += \
     libion_ti
