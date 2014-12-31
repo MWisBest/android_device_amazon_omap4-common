@@ -155,4 +155,4 @@ TARGET_BOOTANIMATION_USE_RGB565 := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-MALLOC_IMPL := dlmalloc
+#MALLOC_IMPL := dlmalloc
