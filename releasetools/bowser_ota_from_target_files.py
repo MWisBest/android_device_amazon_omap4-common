@@ -581,6 +581,7 @@ reboot_now("%(bcb_dev)s", "recovery");
 else if get_stage("%(bcb_dev)s") == "3/3" then
 """ % bcb_dev)
 
+  script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
   if OPTIONS.backuptool:
@@ -600,17 +601,17 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if HasVendorPartition(input_zip):
     system_progress -= 0.1
 
-  if block_based:
-    common.ZipWriteStr(output_zip, "system/bin/otasigcheck.sh",
-                   ""+input_zip.read("SYSTEM/bin/otasigcheck.sh"))
+  #if block_based:
+  #  common.ZipWriteStr(output_zip, "system/bin/otasigcheck.sh",
+  #                 ""+input_zip.read("SYSTEM/bin/otasigcheck.sh"))
 
-  script.AppendExtra("if is_mounted(\"/data\") then")
-  script.ValidateSignatures("data")
-  script.AppendExtra("else")
-  script.Mount("/data")
-  script.ValidateSignatures("data")
-  script.Unmount("/data")
-  script.AppendExtra("endif;")
+  #script.AppendExtra("if is_mounted(\"/data\") then")
+  #script.ValidateSignatures("data")
+  #script.AppendExtra("else")
+  #script.Mount("/data")
+  #script.ValidateSignatures("data")
+  #script.Unmount("/data")
+  #script.AppendExtra("endif;")
 
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
@@ -682,11 +683,11 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   #common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
-  if block_based:
-    script.Mount("/system")
-  script.ValidateSignatures("cleanup")
-  if block_based:
-    script.Unmount("/system")
+  #if block_based:
+  #  script.Mount("/system")
+  #script.ValidateSignatures("cleanup")
+  #if block_based:
+  #  script.Unmount("/system")
 
   if OPTIONS.backuptool:
     script.ShowProgress(0.02, 10)
@@ -726,8 +727,8 @@ endif;
   script.AddToZip(input_zip, output_zip, input_path=OPTIONS.updater_binary)
   WriteMetadata(metadata, output_zip)
 
-  common.ZipWriteStr(output_zip, "META-INF/org/cyanogenmod/releasekey",
-                     ""+input_zip.read("META/releasekey.txt"))
+  #common.ZipWriteStr(output_zip, "META-INF/org/cyanogenmod/releasekey",
+  #                   ""+input_zip.read("META/releasekey.txt"))
 
 def WritePolicyConfig(file_context, output_zip):
   f = open(file_context, 'r');
